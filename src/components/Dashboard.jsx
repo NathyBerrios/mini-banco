@@ -6,7 +6,7 @@ import Historial from "./Historial";
 
 const Dashboard = ({ usuario }) => {
   const [datosUsuario, setDatosUsuario] = useState(null);
-  // Estados explícitos de carga y error exigidos en la rúbrica
+  
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState("");
 

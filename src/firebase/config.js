@@ -2,7 +2,10 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-// Llamamos a las variables protegidas del archivo .env
+/*
+ Llamamos a las variables protegidas del archivo .env mediante variables de entorno 
+ para evitar exponer información sensible
+*/
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,

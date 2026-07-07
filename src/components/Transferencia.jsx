@@ -13,7 +13,7 @@ const Transferencia = ({ usuario, saldoActual }) => {
 
   // Handler con nombre claro
   const handleTransferSubmit = async (e) => {
-    e.preventDefault(); // Fundamental: evita que la página recargue
+    e.preventDefault(); // evita que la página recargue
     setMensaje({ tipo: "", texto: "" });
 
     const montoTransferencia = Number(monto);
