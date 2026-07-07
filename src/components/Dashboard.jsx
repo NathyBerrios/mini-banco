@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase/config";
 import { doc, onSnapshot } from "firebase/firestore";
+import Transferencia from "./Transferencia";
 
 const Dashboard = ({ usuario }) => {
   const [datosUsuario, setDatosUsuario] = useState(null);
@@ -49,6 +50,8 @@ const Dashboard = ({ usuario }) => {
           ${datosUsuario?.saldo?.toLocaleString("es-CL")}
         </p>
       </div>
+      //formulario de transferencia
+      <Transferencia usuario={usuario} saldoActual={datosUsuario?.saldo} />
     </div>
   );
 };
