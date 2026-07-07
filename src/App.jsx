@@ -30,7 +30,7 @@ function App() {
       {usuarioActivo ? (
         <div>
           <header>
-            <h1>XBank</h1>
+            <h1>MnBanca</h1>
             <button onClick={cerrarSesion}>Cerrar Sesión</button>
           </header>
           <Dashboard usuario={usuarioActivo} />
