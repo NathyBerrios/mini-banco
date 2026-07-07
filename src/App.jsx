@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { auth } from "./firebase/config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-
-// Importaremos los componentes después
 import Auth from "./components/Auth";
 import Dashboard from "./components/Dashboard";
 
@@ -35,8 +33,7 @@ function App() {
             <h1>XBank</h1>
             <button onClick={cerrarSesion}>Cerrar Sesión</button>
           </header>
-          {/* Aquí irá el Dashboard que crearemos luego */}
-          <p>Bienvenido, {usuarioActivo.email}</p>
+          <Dashboard usuario={usuarioActivo} />
         </div>
       ) : (
         <div>
