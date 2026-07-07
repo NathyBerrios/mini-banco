@@ -51,9 +51,9 @@ const Dashboard = ({ usuario }) => {
           ${datosUsuario?.saldo?.toLocaleString("es-CL")}
         </p>
       </div>
-      //formulario de transferencia
+      {/*formulario de transferencia*/}
       <Transferencia usuario={usuario} saldoActual={datosUsuario?.saldo} />
-      //se agrega el historial
+      {/*se agregar historial*/}
       <Historial usuario={usuario} />
     </div>
   );
