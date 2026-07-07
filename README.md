@@ -16,7 +16,8 @@ Para probar este proyecto en tu máquina, sigue estos pasos:
 5. Ejecuta `npm run dev` para levantar el servidor local.
 
 Los usuarios creados de prueba son:
-**Usuario 1:** * Email: n@gmail.com
+**Usuario 1:**
+  * Email: n@gmail.com
   * Contraseña: 123456
 * **Usuario 2:**
   * Email: d@gmail.com
