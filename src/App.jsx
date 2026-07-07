@@ -4,7 +4,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 
 // Importaremos los componentes después
 import Auth from "./components/Auth";
-// import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   const [usuarioActivo, setUsuarioActivo] = useState(null);
