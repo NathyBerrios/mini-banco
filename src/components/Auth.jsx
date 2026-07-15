@@ -49,14 +49,18 @@ const Auth = () => {
       
       {/* Formulario controlado por el estado */}
       <form onSubmit={handleSubmit}>
+        <label className="sr-only" htmlFor="email">Correo electrónico</label>
         <input
+          id="email"
           type="email"
           placeholder="Correo electrónico"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        <label className="sr-only" htmlFor="password">Contraseña</label>
         <input
+          id="password"
           type="password"
           placeholder="Contraseña (mínimo 6 caracteres)"
           value={password}
