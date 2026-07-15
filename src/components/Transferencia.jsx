@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { db } from "../firebase/config";
 import { collection, query, where, getDocs, doc, updateDoc, addDoc } from "firebase/firestore";
+import React, { useState } from "react";
 
 const Transferencia = ({ usuario, saldoActual }) => {
   // Formularios controlados por el estado
