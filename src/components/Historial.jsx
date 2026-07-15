@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase/config";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
 
 const Historial = ({ usuario }) => {
   const [movimientos, setMovimientos] = useState([]);
