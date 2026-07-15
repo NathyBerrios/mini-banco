@@ -2,6 +2,7 @@
 import { db } from "../firebase/config";
 import { collection, query, where, getDocs, doc, updateDoc, addDoc } from "firebase/firestore";
 import React, { useState } from "react";
+import { validarTransferencia } from "../utils/validaciones";
 
 const Transferencia = ({ usuario, saldoActual }) => {
   // Formularios controlados por el estado
@@ -17,19 +18,13 @@ const Transferencia = ({ usuario, saldoActual }) => {
     e.preventDefault(); // evita que la página recargue
     setMensaje({ tipo: "", texto: "" });
 
+    // 1. Validaciones puras (RT2): la función se testea sola en validaciones.test.js
+    const errorValidacion = validarTransferencia(monto, saldoActual, emailDestino, usuario.email);
+    if (errorValidacion) {
+      return setMensaje({ tipo: "error", texto: errorValidacion });
+    }
+
     const montoTransferencia = Number(monto);
-
-    // 1. Validaciones LOCALES (antes de tocar Firestore)
-    if (montoTransferencia <= 0) {
-      return setMensaje({ tipo: "error", texto: "El monto debe ser mayor a 0." });
-    }
-    if (montoTransferencia > saldoActual) {
-      return setMensaje({ tipo: "error", texto: "Saldo insuficiente para esta transferencia." });
-    }
-    if (emailDestino.toLowerCase() === usuario.email.toLowerCase()) {
-      return setMensaje({ tipo: "error", texto: "No puedes transferirte dinero a ti mismo." });
-    }
-
     setCargando(true); // Deshabilitamos el botón
 
     try {
@@ -83,7 +78,9 @@ const Transferencia = ({ usuario, saldoActual }) => {
       <h3 style={{ color: "#58a6ff", marginTop: 0 }}>Transferir Dinero</h3>
       
       <form onSubmit={handleTransferSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <label className="sr-only" htmlFor="emailDestino">Correo del destinatario</label>
         <input
+          id="emailDestino"
           type="email"
           placeholder="Correo del destinatario"
           value={emailDestino}
@@ -91,7 +88,9 @@ const Transferencia = ({ usuario, saldoActual }) => {
           required
           style={{ padding: "8px", borderRadius: "5px" }}
         />
+        <label className="sr-only" htmlFor="monto">Monto a transferir</label>
         <input
+          id="monto"
           type="number"
           placeholder="Monto a transferir"
           value={monto}
