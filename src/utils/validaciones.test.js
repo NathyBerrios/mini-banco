@@ -17,6 +17,20 @@ describe('validarTransferencia', () => {
     expect(resultado).toBe('Saldo insuficiente');
   });
 
+  it('rechaza un monto no numérico', () => {
+    // Arrange & Act
+    const resultado = validarTransferencia('abc', 100000, 'test@test.com', 'yo@test.com');
+    // Assert
+    expect(resultado).toBe('Monto inválido');
+  });
+
+  it('rechaza un monto con decimales inválidos', () => {
+    // Arrange & Act
+    const resultado = validarTransferencia(150.5, 100000, 'test@test.com', 'yo@test.com');
+    // Assert
+    expect(resultado).toBe('El monto no puede tener decimales');
+  });
+
   it('rechaza la transferencia a uno mismo', () => {
     const resultado = validarTransferencia(10000, 100000, 'yo@test.com', 'yo@test.com');
     expect(resultado).toBe('No puedes transferirte a ti mismo');
