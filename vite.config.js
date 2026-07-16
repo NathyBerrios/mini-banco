@@ -11,7 +11,17 @@ export default defineConfig({
 
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'html']
+      reporter: ['text', 'html'],
+      // RT6: 70% mínimo en utils/ y en los componentes testeados
+      include: [
+        'src/utils/**',
+        'src/components/Transferencia.jsx',
+        'src/components/Auth.jsx',
+        'src/components/Historial.jsx',
+      ],
+      thresholds: {
+        lines: 70,
+      },
     }
   }
 })
