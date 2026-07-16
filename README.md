@@ -1,14 +1,14 @@
-#Mini Banco
+# Mini Banco
 React + Firebase · Programación reactiva y manejo de eventos
 
 Prototipo de banca digital con una interfaz simple donde los datos se actualicen en tiempo real.
 Se ha implementado una suite de testing unitario para garantizar la robustez de la lógica de negocio y los componentes.
 
-##Uso de IA
+## Uso de IA
 Para el desarrollo de este proyecto me apoyé en IA como guía experta. Le pedí ayuda para estructurar la arquitectura de carpetas separando la lógica de Firebase de los componentes. Además, me sirvió para entender cómo corregir errores de navegación en la terminal al levantar el entorno de Vite y para asegurar que la limpieza de suscripciones en los `useEffect` cumpliera con las buenas prácticas exigidas.
 En el testing me apoyé en la IA para la configuración inicial del entorno de Vitest + React Testing Library y para entender cómo resolver conflictos de versiones de caché que provocaban el error `Invalid hook call`.
 
-##Instalación y ejecución local
+## Instalación y ejecución local
 Para probar este proyecto en tu máquina, sigue estos pasos:
 
 1. Clona este repositorio.
