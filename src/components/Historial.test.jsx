@@ -77,6 +77,45 @@ describe('Componente Historial', () => {
     expect(screen.getByText(/\+\$30.000/i)).toBeInTheDocument(); // Debería tener el signo más
   });
 
+  // RT4: el componente renderiza en el mismo orden que entrega la query (más reciente primero)
+  it('renderiza los movimientos en el orden recibido, del más reciente al más antiguo', () => {
+    // Arrange: la query real ordena con orderBy('fecha', 'desc'); el snapshot ya llega en ese orden
+    const movimientoReciente = {
+      id: 'mov-reciente',
+      data: () => ({
+        emisorUid: 'origen789',
+        receptorUid: 'user123',
+        emisorEmail: 'origen@test.com',
+        monto: 30000,
+        fecha: { toDate: () => new Date('2026-07-11T12:00:00Z') }
+      })
+    };
+    const movimientoAntiguo = {
+      id: 'mov-antiguo',
+      data: () => ({
+        emisorUid: 'user123',
+        receptorUid: 'destino456',
+        receptorEmail: 'destino@test.com',
+        monto: 15000,
+        fecha: { toDate: () => new Date('2026-07-10T10:00:00Z') }
+      })
+    };
+
+    onSnapshot.mockImplementationOnce((query, callback) => {
+      callback([movimientoReciente, movimientoAntiguo]); // el snapshot ya llega ordenado
+      return vi.fn();
+    });
+
+    // Act
+    render(<Historial usuario={mockUsuario} />);
+
+    // Assert: el primer <li> del DOM corresponde al movimiento más reciente
+    const items = screen.getAllByRole('listitem');
+    expect(items).toHaveLength(2);
+    expect(items[0]).toHaveTextContent(/recibido de: origen@test.com/i);
+    expect(items[1]).toHaveTextContent(/transferencia a: destino@test.com/i);
+  });
+
   // BONUS: Verificar que al desmontar el componente se llama la función unsubscribe
   it('llama a la función unsubscribe al desmontar el componente (Bonus)', () => {
     const mockUnsubscribe = vi.fn();
@@ -94,5 +133,21 @@ describe('Componente Historial', () => {
 
     // Verificamos que la limpieza se ejecutó para evitar memory leaks
     expect(mockUnsubscribe).toHaveBeenCalledTimes(1);
+  });
+
+  // RT5: verificación de llamada con toHaveBeenCalledWith
+  it('se suscribe a la colección de movimientos al montar', () => {
+    // Arrange
+    onSnapshot.mockImplementationOnce((query, callback) => {
+      callback([]);
+      return vi.fn();
+    });
+
+    // Act
+    render(<Historial usuario={mockUsuario} />);
+
+    // Assert: se llamó una vez, con la query construida y una función callback
+    expect(onSnapshot).toHaveBeenCalledTimes(1);
+    expect(onSnapshot).toHaveBeenCalledWith(undefined, expect.any(Function));
   });
 });
