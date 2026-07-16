@@ -34,7 +34,7 @@ Este proyecto cuenta con tests unitarios configurados con Vitest y React Testing
 * Para correr la suite de pruebas completa, ejecuta: `npm test`
 * Para generar y ver el reporte de cobertura, ejecuta: `npm run coverage`
 
-![alt text](image.png)
+![alt text](image-1.png)
 
 ## Refactorización para Testing
 Para hacer el código testeable de manera efectiva y cumplir con las buenas prácticas, se extrajo toda la lógica de validación de las transferencias que originalmente vivía dentro del componente `Transferencia.jsx`. Esta lógica se movió a un archivo independiente en `src/utils/validaciones.js` como una función pura, lo que permitió testear de forma exhaustiva casos como montos negativos, saldo insuficiente, destinatario inválido, sin depender del renderizado de React ni de conexiones a Firebase.
